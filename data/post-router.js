@@ -50,6 +50,24 @@ router.post('/', async (req,res) => {
     }
 })
 
+router.delete('/:id', async(req,res)=> {
+    try {
+        const post = await Post.remove(req.params.id);
+        if(post > 0) {
+            res.status(200).json({message: "post has been deleted"})
+        }
+        else {
+            res.status(400).json({message: "could not find the post"})
+        }
+    }
+    catch(error) {
+        console.log(error)
+        res.status(400).json({
+            message: "ERROR deleting your post"
+        })
+    }
+})
+
 
 
 
